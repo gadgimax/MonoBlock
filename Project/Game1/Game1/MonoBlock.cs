@@ -1,20 +1,23 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoBlock.Models;
 
 namespace Game1
 {
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    public class MonoBlock : Game
     {
         GraphicsDeviceManager graphics;
+        Player player1;
+        Player player2;
         SpriteBatch spriteBatch;
         Texture2D texture;
         Vector2 position = new Vector2(0, 0);
 
-        public Game1()
+        public MonoBlock()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -28,14 +31,9 @@ namespace Game1
         /// </summary>
         protected override void Initialize()
         {
+            player2 = new Player(GraphicsDevice, 1);
+            player1 = new Player(GraphicsDevice, 2);
             // TODO: Add your initialization logic here
-            texture = new Texture2D(GraphicsDevice, 100, 100);
-            Color[] colordata = new Color[100 * 100];
-            for (int i = 0; i < 10000 ; i++)
-            {
-                colordata[i] = Color.Red;
-            }
-            texture.SetData<Color>(colordata);
             base.Initialize();
         }
 
@@ -71,7 +69,7 @@ namespace Game1
                 Exit();
 
             if (Keyboard.GetState().IsKeyDown(Keys.Down))
-                position.Y += 1;
+                player1.Position.Y += 1;
 
             // TODO: Add your update logic here
             position.X += 1;
@@ -90,12 +88,18 @@ namespace Game1
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin();
-            spriteBatch.Draw(texture, position);
-            spriteBatch.End();
+            DrawPlayer(player1);
+            DrawPlayer(player2);
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
+        }
+
+        private void DrawPlayer(Player p)
+        {
+            spriteBatch.Begin();
+            spriteBatch.Draw(p.Texture, p.Position);
+            spriteBatch.End();
         }
     }
 }
