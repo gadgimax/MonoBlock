@@ -70,13 +70,22 @@ namespace Game1
 
             if (Keyboard.GetState().IsKeyDown(Keys.Down))
                 player1.Position.Y += 1;
+            if (Keyboard.GetState().IsKeyDown(Keys.Up))
+                player1.Position.Y -= 1;
+            if (Keyboard.GetState().IsKeyDown(Keys.Right))
+                player1.Position.X += 1;
+            if (Keyboard.GetState().IsKeyDown(Keys.Left))
+                player1.Position.X -= 1;
 
-            // TODO: Add your update logic here
-            position.X += 1;
-            if (position.X > this.GraphicsDevice.Viewport.Width)
-            {
-                position.X = 0;
-            }
+            if (player1.Position.X > Window.ClientBounds.Width - player1.Texture.Width)
+                player1.Position.X = Window.ClientBounds.Width - player1.Texture.Width;
+            if (player1.Position.Y > Window.ClientBounds.Height - player1.Texture.Height)
+                player1.Position.Y = Window.ClientBounds.Height - player1.Texture.Height;
+
+            if (player1.Position.X < 0)
+                player1.Position.X = 0;
+            if (player1.Position.Y < 0)
+                player1.Position.Y = 0;
 
             base.Update(gameTime);
         }
