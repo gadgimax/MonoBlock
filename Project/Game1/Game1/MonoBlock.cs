@@ -14,7 +14,6 @@ namespace Game1
         Player player1;
         Player player2;
         SpriteBatch spriteBatch;
-        Texture2D texture;
         Vector2 position = new Vector2(0, 0);
 
         public MonoBlock()
@@ -31,8 +30,9 @@ namespace Game1
         /// </summary>
         protected override void Initialize()
         {
-            player2 = new Player(GraphicsDevice, 1);
-            player1 = new Player(GraphicsDevice, 2);
+            var texture = new Texture2D(GraphicsDevice, 100, 100);
+            player2 = new Player(texture, 1);
+            player1 = new Player(texture, 2);
             // TODO: Add your initialization logic here
             base.Initialize();
         }
@@ -45,7 +45,7 @@ namespace Game1
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            
             // TODO: use this.Content to load your game content here
         }
 
@@ -95,11 +95,12 @@ namespace Game1
             base.Draw(gameTime);
         }
 
-        private void DrawPlayer(Player p)
+        private void DrawPlayer(Sprite p)
         {
             spriteBatch.Begin();
-            spriteBatch.Draw(p.Texture, p.Position);
+            p.Draw(spriteBatch);
             spriteBatch.End();
+
         }
     }
 }

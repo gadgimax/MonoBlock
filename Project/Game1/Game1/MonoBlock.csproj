@@ -44,6 +44,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Models\Player.cs" />
+    <Compile Include="Models\Sprite.cs" />
     <Compile Include="MonoBlock.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

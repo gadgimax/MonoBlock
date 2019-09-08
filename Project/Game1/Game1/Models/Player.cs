@@ -8,11 +8,10 @@ using System.Threading.Tasks;
 
 namespace MonoBlock.Models
 {
-    public class Player
+    public class Player : Sprite
     {
-        public Player(GraphicsDevice graphicsDevice, int num)
+        public Player(Texture2D texture, int num) : base(texture)
         {
-            Texture = new Texture2D(graphicsDevice, 100, 100);
             Color[] colordata = new Color[100 * 100];
             Color c = num == 1 ? Color.Red : Color.Green;
             int p = num == 1 ? 700 : -0;
@@ -20,7 +19,7 @@ namespace MonoBlock.Models
             {
                 colordata[i] = c;
             }
-            Texture.SetData<Color>(colordata);
+            texture.SetData<Color>(colordata);
             Position.X += p;
         }
 
